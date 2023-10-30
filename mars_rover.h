@@ -1,17 +1,18 @@
 #pragma once
 
-#include <string>
+#include <memory>
 #include <iostream>
+#include <string>
 
 /**
  * A class template to express an equality comparison interface
  */
-template <typename T> class EqualComparable {
+template <typename T> class EqualityComparable {
     friend bool operator==(const T& lhs, const T& rhs) { return lhs.equal_to(rhs); }
     friend bool operator!=(const T& lhs, const T& rhs) { return !lhs.equal_to(rhs); }
 };
 
-struct Location : private EqualComparable<Location> {
+struct Location : private EqualityComparable<Location> {
     Location() = delete;
     Location(int x, int y, char orientation) : x(x), y(y), orientation(orientation) {}
 
@@ -35,7 +36,7 @@ operator<<(std::ostream& os, const Location& location)
 class MarsRover {
 public:
     MarsRover() = delete;
-    MarsRover(Location location) : location(location) {}
+    MarsRover(Location location) : location(std::move(location)) {}
 
     void move(const std::string& commands) {}
 
