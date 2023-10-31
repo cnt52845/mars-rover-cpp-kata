@@ -1,7 +1,7 @@
 # Mars rover kata in C++
 
 [![CI](https://github.com/Coding-Cuddles/mars-rover-cpp-kata/actions/workflows/main.yml/badge.svg)](https://github.com/Coding-Cuddles/mars-rover-cpp-kata/actions/workflows/main.yml)
-[![Replit](https://replit.com/badge?caption=Try%20with%20Replit&variant=small)](https://replit.com/new/github/Coding-Cuddles/mars-rover-cpp-kata)
+[![Replit](https://img.shields.io/badge/Try%20with%20Replit-black?logo=replit)](https://replit.com/new/github/Coding-Cuddles/mars-rover-cpp-kata)
 
 ## Overview
 
@@ -17,7 +17,7 @@ remotely controlled vehicles to the planet's surface. You need to develop a
 control software that translates the commands sent from Earth to instructions
 that the rover understands.
 
-NASA engineers treat the surface of Mars as a square grid, with side's length
+NASA engineers treat the surface of Mars as a square grid, with side length
 being a power of two, e.g., 4x4, 8x8, 16x16, etc.
 
 On the grid, the rover's location is defined by coordinates (x, y) and an
