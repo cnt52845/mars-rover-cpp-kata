@@ -1,11 +1,11 @@
-compile = ["make", "build"]
-run = ["make", "test"]
-entrypoint = "main.cpp"
+compile = "make"
+run = "make test"
 language = "c++"
 hidden = ["LICENSE", "CMakeLists.txt", "Makefile", ".gitignore", ".clang-format", "compile_commands.json", ".ccls-cache", "build"]
+modules = ["cpp-clang14", "nix"]
 
 [nix]
-channel = "stable-21_11"
+channel = "stable-24_05"
 
 [languages]
 
@@ -17,3 +17,7 @@ start = "clangd"
 
 [debugger]
 support = false
+
+[deployment]
+run = ["sh", "-c", "make test"]
+build = ["sh", "-c", "make"]
