@@ -3,51 +3,31 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-TEST(OpportunityTest, GivenEmptyCommands_WhenMove_ThenLocationDoesNotChange)
-{
-    auto initial_location = Location(0, 0, 'N');
-    auto rover            = Opportunity(initial_location);
-    rover.move("");
+struct MoveTestParams {
+    Location    initial_location;
+    std::string commands;
+    Location    expected_location;
+};
 
-    EXPECT_EQ(rover.location, initial_location);
+class OpportunityTest : public ::testing::TestWithParam<MoveTestParams> {
+protected:
+    Opportunity rover{GetParam().initial_location};
+};
+
+TEST_P(OpportunityTest, Move)
+{
+    const auto& params = GetParam();
+    rover.move(params.commands);
+    EXPECT_EQ(rover.location, params.expected_location);
 }
 
-TEST(OpportunityTest, GivenOrientationNorth_WhenTurnLeftOneTime_ThenOrientationWest)
-{
-    auto initial_location  = Location(0, 0, 'N');
-    auto expected_location = Location(0, 0, 'W');
-    auto rover             = Opportunity(initial_location);
-    rover.move("L");
+INSTANTIATE_TEST_SUITE_P(OpportunityEmptyCommandsTest, OpportunityTest,
+                         ::testing::Values(MoveTestParams{
+                             Location(0, 0, 'N'), "", Location(0, 0, 'N')}));
 
-    EXPECT_EQ(rover.location, expected_location);
-}
-
-TEST(OpportunityTest, GivenOrientationWest_WhenTurnLeftOneTime_ThenOrientationSouth)
-{
-    auto initial_location  = Location(0, 0, 'W');
-    auto expected_location = Location(0, 0, 'S');
-    auto rover             = Opportunity(initial_location);
-    rover.move("L");
-
-    EXPECT_EQ(rover.location, expected_location);
-}
-
-TEST(OpportunityTest, GivenOrientationSouth_WhenTurnLeftOneTime_ThenOrientationEast)
-{
-    auto initial_location  = Location(0, 0, 'S');
-    auto expected_location = Location(0, 0, 'E');
-    auto rover             = Opportunity(initial_location);
-    rover.move("L");
-
-    EXPECT_EQ(rover.location, expected_location);
-}
-
-TEST(OpportunityTest, GivenOrientationEast_WhenTurnLeftOneTime_ThenOrientationNorth)
-{
-    auto initial_location  = Location(0, 0, 'E');
-    auto expected_location = Location(0, 0, 'N');
-    auto rover             = Opportunity(initial_location);
-    rover.move("L");
-
-    EXPECT_EQ(rover.location, expected_location);
-}
+INSTANTIATE_TEST_SUITE_P(
+    OpportunityRotateLeftTests, OpportunityTest,
+    ::testing::Values(MoveTestParams{Location(0, 0, 'N'), "L", Location(0, 0, 'W')},
+                      MoveTestParams{Location(0, 0, 'W'), "L", Location(0, 0, 'S')},
+                      MoveTestParams{Location(0, 0, 'S'), "L", Location(0, 0, 'E')},
+                      MoveTestParams{Location(0, 0, 'E'), "L", Location(0, 0, 'N')}));
