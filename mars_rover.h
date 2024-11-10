@@ -38,7 +38,15 @@ public:
     MarsRover() = delete;
     MarsRover(Location location) : location(std::move(location)) {}
 
-    void move(const std::string& commands) {}
+    virtual void move(const std::string& commands) = 0;
 
     Location location;
+};
+
+class Opportunity : public MarsRover {
+public:
+    Opportunity() = delete;
+    Opportunity(Location location) : MarsRover(location) {}
+
+    void move(const std::string& commands) override {}
 };
