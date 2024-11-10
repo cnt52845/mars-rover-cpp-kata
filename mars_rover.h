@@ -48,5 +48,10 @@ public:
     Opportunity() = delete;
     Opportunity(Location location) : MarsRover(location) {}
 
-    void move(const std::string& commands) override {}
+    void move(const std::string& commands) override
+    {
+        if (commands == "L") {
+            location.orientation = 'W';
+        }
+    }
 };
