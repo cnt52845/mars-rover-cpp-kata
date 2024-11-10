@@ -54,6 +54,9 @@ public:
         if (commands == "L") {
             location.orientation = rotate_left(location.orientation);
         }
+        else if (commands == "R") {
+            location.orientation = rotate_right(location.orientation);
+        }
     }
 
 protected:
@@ -63,5 +66,13 @@ protected:
             {'N', 'W'}, {'W', 'S'}, {'S', 'E'}, {'E', 'N'}};
 
         return left_turns.at(orientation);
+    }
+
+    char rotate_right(char orientation) const
+    {
+        static const std::unordered_map<char, char> right_turns = {
+            {'N', 'E'}, {'E', 'S'}, {'S', 'W'}, {'W', 'N'}};
+
+        return right_turns.at(orientation);
     }
 };
