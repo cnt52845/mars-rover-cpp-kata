@@ -52,16 +52,16 @@ public:
     void move(const std::string& commands) override
     {
         if (commands == "L") {
-            rotate_left();
+            location.orientation = rotate_left(location.orientation);
         }
     }
 
 protected:
-    void rotate_left()
+    char rotate_left(char orientation) const
     {
         static const std::unordered_map<char, char> left_turns = {
             {'N', 'W'}, {'W', 'S'}, {'S', 'E'}, {'E', 'N'}};
 
-        location.orientation = left_turns.at(location.orientation);
+        return left_turns.at(orientation);
     }
 };
