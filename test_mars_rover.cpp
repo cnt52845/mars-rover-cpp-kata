@@ -31,3 +31,13 @@ TEST(OpportunityTest, GivenOrientationWest_WhenTurnLeftOneTime_ThenOrientationSo
 
     EXPECT_EQ(rover.location, expected_location);
 }
+
+TEST(OpportunityTest, GivenOrientationSouth_WhenTurnLeftOneTime_ThenOrientationEast)
+{
+    auto initial_location  = Location(0, 0, 'S');
+    auto expected_location = Location(0, 0, 'E');
+    auto rover             = Opportunity(initial_location);
+    rover.move("L");
+
+    EXPECT_EQ(rover.location, expected_location);
+}

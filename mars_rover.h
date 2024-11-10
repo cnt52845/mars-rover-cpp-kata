@@ -54,8 +54,11 @@ public:
             if (location.orientation == 'N') {
                 location.orientation = 'W';
             }
-            else {
+            else if (location.orientation == 'W') {
                 location.orientation = 'S';
+            }
+            else {
+                location.orientation = 'E';
             }
         }
     }
