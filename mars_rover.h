@@ -3,6 +3,7 @@
 #include <memory>
 #include <iostream>
 #include <string>
+#include <unordered_map>
 
 /**
  * A class template to express an equality comparison interface
@@ -58,17 +59,9 @@ public:
 protected:
     void rotate_left()
     {
-        if (location.orientation == 'N') {
-            location.orientation = 'W';
-        }
-        else if (location.orientation == 'W') {
-            location.orientation = 'S';
-        }
-        else if (location.orientation == 'S') {
-            location.orientation = 'E';
-        }
-        else {
-            location.orientation = 'N';
-        }
+        static const std::unordered_map<char, char> left_turns = {
+            {'N', 'W'}, {'W', 'S'}, {'S', 'E'}, {'E', 'N'}};
+
+        location.orientation = left_turns.at(location.orientation);
     }
 };
