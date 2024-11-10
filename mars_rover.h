@@ -51,18 +51,24 @@ public:
     void move(const std::string& commands) override
     {
         if (commands == "L") {
-            if (location.orientation == 'N') {
-                location.orientation = 'W';
-            }
-            else if (location.orientation == 'W') {
-                location.orientation = 'S';
-            }
-            else if (location.orientation == 'S') {
-                location.orientation = 'E';
-            }
-            else {
-                location.orientation = 'N';
-            }
+            rotate_left();
+        }
+    }
+
+protected:
+    void rotate_left()
+    {
+        if (location.orientation == 'N') {
+            location.orientation = 'W';
+        }
+        else if (location.orientation == 'W') {
+            location.orientation = 'S';
+        }
+        else if (location.orientation == 'S') {
+            location.orientation = 'E';
+        }
+        else {
+            location.orientation = 'N';
         }
     }
 };
