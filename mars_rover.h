@@ -59,7 +59,12 @@ public:
                 location.orientation = rotate_right(location.orientation);
             }
             else if (command == 'F') {
-                location.y++;
+                if (location.orientation == 'N') {
+                    location.y++;
+                }
+                else {
+                    location.x++;
+                }
             }
         }
     }
