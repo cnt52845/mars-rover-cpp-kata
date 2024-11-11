@@ -3,6 +3,7 @@
 #include <memory>
 #include <iostream>
 #include <string>
+#include <unordered_map>
 
 /**
  * A class template to express an equality comparison interface
@@ -38,7 +39,55 @@ public:
     MarsRover() = delete;
     MarsRover(Location location) : location(std::move(location)) {}
 
-    void move(const std::string& commands) {}
+    virtual void move(const std::string& commands) = 0;
 
     Location location;
+};
+
+class Opportunity : public MarsRover {
+public:
+    Opportunity() = delete;
+    Opportunity(Location location) : MarsRover(location) {}
+
+    void move(const std::string& commands) override
+    {
+        for (const char command : commands) {
+            if (command == 'L') {
+                location.orientation = rotate_left(location.orientation);
+            }
+            else if (command == 'R') {
+                location.orientation = rotate_right(location.orientation);
+            }
+            else if (command == 'F') {
+                move_forward();
+            }
+        }
+    }
+
+protected:
+    char rotate_left(char orientation) const
+    {
+        static const std::unordered_map<char, char> left_turns = {
+            {'N', 'W'}, {'W', 'S'}, {'S', 'E'}, {'E', 'N'}};
+
+        return left_turns.at(orientation);
+    }
+
+    char rotate_right(char orientation) const
+    {
+        static const std::unordered_map<char, char> right_turns = {
+            {'N', 'E'}, {'E', 'S'}, {'S', 'W'}, {'W', 'N'}};
+
+        return right_turns.at(orientation);
+    }
+
+    void move_forward()
+    {
+        static const std::unordered_map<char, std::pair<int, int>> move_forward_map = {
+            {'N', {0, 1}}, {'E', {1, 0}}, {'S', {0, -1}}, {'W', {-1, 0}}};
+
+        auto movement = move_forward_map.at(location.orientation);
+        location.x += movement.first;
+        location.y += movement.second;
+    }
 };
