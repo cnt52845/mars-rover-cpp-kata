@@ -83,17 +83,11 @@ protected:
 
     void move_forward()
     {
-        if (location.orientation == 'N') {
-            location.y++;
-        }
-        else if (location.orientation == 'E') {
-            location.x++;
-        }
-        else if (location.orientation == 'S') {
-            location.y--;
-        }
-        else {
-            location.x--;
-        }
+        static const std::unordered_map<char, std::pair<int, int>> move_forward_map = {
+            {'N', {0, 1}}, {'E', {1, 0}}, {'S', {0, -1}}, {'W', {-1, 0}}};
+
+        auto movement = move_forward_map.at(location.orientation);
+        location.x += movement.first;
+        location.y += movement.second;
     }
 };
