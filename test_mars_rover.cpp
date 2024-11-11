@@ -77,3 +77,14 @@ TEST(OpportunityTest, GivenOrientationEast_WhenMoveForward_ThenXIncreases)
 
     EXPECT_EQ(rover.location, expected_location);
 }
+
+TEST(OpportunityTest, GivenOrientationSouth_WhenMoveForward_ThenYDecreases)
+{
+    const Location initial_location{1, 1, 'S'};
+    const Location expected_location{1, 0, 'S'};
+    Opportunity    rover{initial_location};
+
+    rover.move("F");
+
+    EXPECT_EQ(rover.location, expected_location);
+}
