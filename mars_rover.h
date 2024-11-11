@@ -65,8 +65,11 @@ public:
                 else if (location.orientation == 'E') {
                     location.x++;
                 }
-                else {
+                else if (location.orientation == 'S') {
                     location.y--;
+                }
+                else {
+                    location.x--;
                 }
             }
         }
