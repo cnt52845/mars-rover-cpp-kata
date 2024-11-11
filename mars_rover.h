@@ -59,18 +59,7 @@ public:
                 location.orientation = rotate_right(location.orientation);
             }
             else if (command == 'F') {
-                if (location.orientation == 'N') {
-                    location.y++;
-                }
-                else if (location.orientation == 'E') {
-                    location.x++;
-                }
-                else if (location.orientation == 'S') {
-                    location.y--;
-                }
-                else {
-                    location.x--;
-                }
+                move_forward();
             }
         }
     }
@@ -90,5 +79,21 @@ protected:
             {'N', 'E'}, {'E', 'S'}, {'S', 'W'}, {'W', 'N'}};
 
         return right_turns.at(orientation);
+    }
+
+    void move_forward()
+    {
+        if (location.orientation == 'N') {
+            location.y++;
+        }
+        else if (location.orientation == 'E') {
+            location.x++;
+        }
+        else if (location.orientation == 'S') {
+            location.y--;
+        }
+        else {
+            location.x--;
+        }
     }
 };
