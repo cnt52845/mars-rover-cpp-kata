@@ -58,6 +58,9 @@ public:
             else if (command == 'R') {
                 location.orientation = rotate_right(location.orientation);
             }
+            else if (command == 'F') {
+                location.y++;
+            }
         }
     }
 

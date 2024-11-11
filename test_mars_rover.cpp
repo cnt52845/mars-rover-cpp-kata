@@ -55,3 +55,14 @@ INSTANTIATE_TEST_SUITE_P(
                       MoveTestParams{Location(0, 0, 'E'), "RR", Location(0, 0, 'W')},
                       MoveTestParams{Location(0, 0, 'N'), "LLR", Location(0, 0, 'W')},
                       MoveTestParams{Location(0, 0, 'N'), "RRL", Location(0, 0, 'E')}));
+
+TEST(OpportunityTest, GivenOrientationNorth_WhenMoveForward_ThenYIncreases)
+{
+    const Location initial_location{1, 1, 'N'};
+    const Location expected_location{1, 2, 'N'};
+    Opportunity    rover{initial_location};
+
+    rover.move("F");
+
+    EXPECT_EQ(rover.location, expected_location);
+}
