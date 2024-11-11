@@ -56,46 +56,9 @@ INSTANTIATE_TEST_SUITE_P(
                       MoveTestParams{Location(0, 0, 'N'), "LLR", Location(0, 0, 'W')},
                       MoveTestParams{Location(0, 0, 'N'), "RRL", Location(0, 0, 'E')}));
 
-TEST(OpportunityTest, GivenOrientationNorth_WhenMoveForward_ThenYIncreases)
-{
-    const Location initial_location{1, 1, 'N'};
-    const Location expected_location{1, 2, 'N'};
-    Opportunity    rover{initial_location};
-
-    rover.move("F");
-
-    EXPECT_EQ(rover.location, expected_location);
-}
-
-TEST(OpportunityTest, GivenOrientationEast_WhenMoveForward_ThenXIncreases)
-{
-    const Location initial_location{1, 1, 'E'};
-    const Location expected_location{2, 1, 'E'};
-    Opportunity    rover{initial_location};
-
-    rover.move("F");
-
-    EXPECT_EQ(rover.location, expected_location);
-}
-
-TEST(OpportunityTest, GivenOrientationSouth_WhenMoveForward_ThenYDecreases)
-{
-    const Location initial_location{1, 1, 'S'};
-    const Location expected_location{1, 0, 'S'};
-    Opportunity    rover{initial_location};
-
-    rover.move("F");
-
-    EXPECT_EQ(rover.location, expected_location);
-}
-
-TEST(OpportunityTest, GivenOrientationWest_WhenMoveForward_ThenXDecreases)
-{
-    const Location initial_location{1, 1, 'W'};
-    const Location expected_location{0, 1, 'W'};
-    Opportunity    rover{initial_location};
-
-    rover.move("F");
-
-    EXPECT_EQ(rover.location, expected_location);
-}
+INSTANTIATE_TEST_SUITE_P(
+    OpportunitySingleMoveForwardTests, OpportunityTest,
+    ::testing::Values(MoveTestParams{Location(1, 1, 'N'), "F", Location(1, 2, 'N')},
+                      MoveTestParams{Location(1, 1, 'E'), "F", Location(2, 1, 'E')},
+                      MoveTestParams{Location(1, 1, 'S'), "F", Location(1, 0, 'S')},
+                      MoveTestParams{Location(1, 1, 'W'), "F", Location(0, 1, 'W')}));
