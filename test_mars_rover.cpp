@@ -48,3 +48,10 @@ INSTANTIATE_TEST_SUITE_P(
                       MoveTestParams{Location(0, 0, 'E'), "R", Location(0, 0, 'S')},
                       MoveTestParams{Location(0, 0, 'S'), "R", Location(0, 0, 'W')},
                       MoveTestParams{Location(0, 0, 'W'), "R", Location(0, 0, 'N')}));
+
+INSTANTIATE_TEST_SUITE_P(
+    OpportunityMultipleRotateTests, OpportunityTest,
+    ::testing::Values(MoveTestParams{Location(0, 0, 'N'), "LL", Location(0, 0, 'S')},
+                      MoveTestParams{Location(0, 0, 'E'), "RR", Location(0, 0, 'W')},
+                      MoveTestParams{Location(0, 0, 'N'), "LLR", Location(0, 0, 'W')},
+                      MoveTestParams{Location(0, 0, 'N'), "RRL", Location(0, 0, 'E')}));

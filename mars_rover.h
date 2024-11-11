@@ -51,11 +51,13 @@ public:
 
     void move(const std::string& commands) override
     {
-        if (commands == "L") {
-            location.orientation = rotate_left(location.orientation);
-        }
-        else if (commands == "R") {
-            location.orientation = rotate_right(location.orientation);
+        for (const char command : commands) {
+            if (command == 'L') {
+                location.orientation = rotate_left(location.orientation);
+            }
+            else if (command == 'R') {
+                location.orientation = rotate_right(location.orientation);
+            }
         }
     }
 
